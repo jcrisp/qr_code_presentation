@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Choosing a gem</title>
+  <link rel="stylesheet" href="slides.css">
+  <script src="slides.js"></script>
+</head>
+<body>
+
+  <h2>Choosing a gem</h2>
+
+  <ul>
+    <li><strong>rqrcode</strong> &mdash; pure Ruby, well maintained, renders SVG. <em>Chosen.</em></li>
+    <li><strong>rqrcode_core</strong> &mdash; the encoder underneath rqrcode. rqrcode is a thin
+      renderer on top, so going lower buys nothing but writing the SVG myself.</li>
+    <li><strong>barby</strong> &mdash; a general barcode toolkit covering a dozen symbologies.
+      Far more surface than one QR needs, and its image output pulls in the same PNG library.</li>
+    <li><strong>libqrencode bindings</strong> &mdash; a C extension. A build toolchain and one
+      more thing to fail on deploy, for a job pure Ruby does fine.</li>
+  </ul>
+
+  <p class="note">The deciding rule: <em>the most beautiful solution has the fewest
+  dependencies.</em> Pure Ruby, no native extension &mdash; and <strong>SVG output</strong>,
+  which turns out to matter more than it looks.</p>
+
+</body>
+</html>

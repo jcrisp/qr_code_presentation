@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Testing: the road not taken</title>
+  <link rel="stylesheet" href="slides.css">
+  <script src="slides.js"></script>
+</head>
+<body>
+
+  <h2>Testing: the road not taken</h2>
+
+  <p class="lead">The obvious end-to-end test is to actually decode the QR code and assert on
+  the URL. We didn't.</p>
+
+  <ul>
+    <li>It needs a <strong>screenshot plus a decoder gem</strong> &mdash; adding a dependency,
+      two slides after deleting one.</li>
+    <li>Slow, and brittle across the two browser drivers the suite runs under.</li>
+    <li>It tests the <strong>wrong failure</strong>. A maintained encoder does not quietly
+      encode the wrong bytes.</li>
+  </ul>
+
+  <p class="note">The failure that actually happens is duller: the library emits a
+  <strong>blank or empty code</strong>, or the view renders nothing at all. Test for that.</p>
+
+</body>
+</html>

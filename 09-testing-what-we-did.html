@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Testing: what we did</title>
+  <link rel="stylesheet" href="slides.css">
+  <script src="slides.js"></script>
+</head>
+<body>
+
+  <h2>Testing: what we did</h2>
+
+  <p class="filename">shared_examples.rb</p>
+<pre class="small"><code class="ruby"># Don't decode the QR (that needs a screenshot + decoder) - just guard against
+# the likely failure, the library emitting a blank/empty code. A real QR has a
+# square module grid (viewBox) and a long single path; an empty one would be
+# tiny or have no path data.
+def assert_qr_rendered(svg)
+  view_box = find(svg)[:viewBox].to_s.split
+  expect(view_box[2]).to eq view_box[3]                     # square module grid
+  expect(view_box[2].to_i).to be &gt;= 21                      # at least a version-1 grid
+  expect(find("#{svg} path")[:d].to_s.length).to be &gt; 500   # path present, not blank
+end
+</code></pre>
+
+  <p>Three cheap structural assertions, no decoder. It takes a selector, so the same helper
+  covers every page that shows a code.</p>
+
+</body>
+</html>

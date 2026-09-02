@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The problem</title>
+  <link rel="stylesheet" href="slides.css">
+  <script src="slides.js"></script>
+</head>
+<body>
+
+  <h2>The problem</h2>
+
+  <p class="lead">RiskAssess keeps a school's Hazardous Chemicals Register &mdash; a
+  legally required list of what's stored where.</p>
+
+  <ul>
+    <li>Emergency services need it <strong>at the door, on a phone, with no login</strong>.</li>
+    <li>Schools print an <em>Entire School</em> code for the front desk, and a per-room code
+      for each storeroom door.</li>
+    <li>Scanning opens a public, share-code URL straight to that location's register.</li>
+    <li>A second code on the stocktake screen lets a teacher hop from desktop to phone
+      mid-count and walk into the store.</li>
+  </ul>
+
+  <p class="note">So: generate a QR code from a URL, server side, render it in a page that
+  prints well &mdash; and be confident it isn't blank.</p>
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Generating the code</title>
+  <link rel="stylesheet" href="slides.css">
+  <script src="slides.js"></script>
+</head>
+<body>
+
+  <h2>Generating the code</h2>
+
+  <p class="filename">share_controller.rb</p>
+<pre><code class="ruby">require 'rqrcode'
+
+@share_url = "https://jamescrisp.org"
+@qr_svg = RQRCode::QRCode.new(@share_url).as_svg(viewbox: true, use_path: true)
+</code></pre>
+
+  <p class="filename">share.html.haml</p>
+<pre><code class="ruby">.qr_svg= raw @qr_svg
+</code></pre>
+
+  <ul>
+    <li><code>viewbox: true</code> &mdash; no fixed width, so one SVG scales to the 250px box
+      on screen and the 350px poster in print. CSS decides the size.</li>
+    <li><code>use_path: true</code> &mdash; one <code>&lt;path&gt;</code> instead of several
+      hundred <code>&lt;rect&gt;</code> elements.</li>
+  </ul>
+
+  <p class="note">Three lines, no files on disk, no image processing. Hold on to those two
+  flags &mdash; they're what makes the test on the next slides possible.</p>
+
+</body>
+</html>

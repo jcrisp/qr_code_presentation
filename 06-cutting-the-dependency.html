@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cutting the dependency</title>
+  <link rel="stylesheet" href="slides.css">
+  <script src="slides.js"></script>
+</head>
+<body>
+
+  <h2>Cutting the dependency</h2>
+
+  <p class="lead">We render SVG. So the PNG renderer &mdash; and the image library behind it
+  &mdash; is code we ship, never call, and can still be attacked through.</p>
+
+  <ul>
+    <li>Image libraries are a <strong>classic memory-safety target</strong>: they parse
+      untrusted binary, and decoders have a long CVE history.</li>
+    <li>Loaded code is reachable code. An unused dependency is pure risk with no upside.</li>
+    <li>So I had <strong>Codex</strong> strip the PNG path out of rqrcode and drop the
+      library from the gemspec. Small, mechanical, easy to review.</li>
+  </ul>
+
+  <p class="note"><strong>The trade:</strong> carrying a fork costs real maintenance &mdash;
+  track upstream, re-apply on every bump. Worth it when the patch is small and the payoff is
+  a smaller security surface. It would <em>not</em> be worth it for a sprawling change you'd
+  have to rebase forever.</p>
+
+  <a class="link" href="https://github.com/jcrispw/rqrcode/commit/4fedca0551ba5c4515f9dbd63dff566a3ad86d4e">github.com/jcrispw/rqrcode/commit/4fedca0551ba5c4515f9dbd63dff566a3ad86d4e</a>
+
+</body>
+</html>
