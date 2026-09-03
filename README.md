@@ -9,6 +9,13 @@ straight off disk.
   jump to the ends, `f` for fullscreen. Clicking the right of the screen advances, the
   left third goes back.
 
+## Sizing
+
+Type is sized in rem off one root value that scales with the viewport (~26px at 1080p),
+so the deck adapts to whatever it is projected on. `slides.js` then shrinks that root
+value if a slide would overflow the screen or push a code block sideways. It only ever
+shrinks — growing sparse slides would make the type size wander between slides.
+
 ## Replacing the screenshots
 
 `images/screen.png` and `images/print.png` are generated placeholders. Overwrite them
@@ -16,10 +23,9 @@ with the real screenshots, keeping the same filenames — nothing else needs cha
 
 ## The QR code on the last slide
 
-`images/link-qr.svg` is a placeholder. Generate a real QR code for the commit link and
-overwrite that file, keeping the same name — the slide sizes it via the `.qr` class, so
-nothing else needs changing. SVG is preferred, but a PNG works if you rename the reference
-in `13-questions.html`.
+`images/link-qr.png` is the QR code for the commit link. To replace it, overwrite that
+file keeping the same name — the slide sizes it via the `.qr` class, which adds a white
+margin around it so it is not flush against the black background.
 
 ## Adding or reordering slides
 

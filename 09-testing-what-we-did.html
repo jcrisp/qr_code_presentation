@@ -12,21 +12,19 @@
   <h2>Testing: what we did</h2>
 
   <p class="filename">shared_examples.rb</p>
-<pre><code class="ruby"># Don't decode the QR (that needs a screenshot + decoder) - just guard against
-# the likely failure, the library emitting a blank/empty code. A real QR has a
-# square module grid (viewBox) and a long single path; an empty one would be
-# tiny or have no path data.
+<pre><code class="ruby"># Don't decode the QR (that needs a screenshot + decoder) - just guard
+# against the likely failure, a blank code. A real QR has a square
+# module grid (viewBox) and a long single path; a blank one has neither.
 def assert_qr_rendered(svg)
   view_box = find(svg)[:viewBox].to_s.split
-  expect(view_box[2]).to eq view_box[3]                     # square module grid
-  expect(view_box[2].to_i).to be &gt;= 21                      # at least a version-1 grid
-  expect(find("#{svg} path")[:d].to_s.length).to be &gt; 500   # path present, not blank
+  expect(view_box[2]).to eq view_box[3]      # square module grid
+  expect(view_box[2].to_i).to be &gt;= 21       # version-1 grid or bigger
+  expect(find("#{svg} path")[:d].to_s.length).to be &gt; 500 # not blank
 end
 </code></pre>
 
   <ul>
-    <li>Three structural assertions, no decoder.</li>
-    <li>Takes a selector &mdash; one helper covers every page.</li>
+    <li>Three structural assertions, no decoder. Takes a selector &mdash; one helper covers every page.</li>
   </ul>
 
 </body>

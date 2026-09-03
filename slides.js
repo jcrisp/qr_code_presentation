@@ -119,9 +119,45 @@
     block.innerHTML = output;
   }
 
+
+  /* Fit-to-screen.
+
+     The CSS picks a root font size from the viewport; this trims it down when a
+     slide would otherwise overflow the screen or push a code block sideways. It
+     only ever shrinks - growing sparse slides would make the type size differ
+     from slide to slide, which is exactly what we do not want in a deck. */
+
+  function overflows() {
+    if (document.body.scrollHeight > window.innerHeight + 1) return true;
+    var pres = document.getElementsByTagName("pre");
+    for (var i = 0; i < pres.length; i++) {
+      if (pres[i].scrollWidth > pres[i].clientWidth + 1) return true;
+    }
+    return false;
+  }
+
+  function fitToScreen() {
+    var root = document.documentElement;
+    root.style.fontSize = "";                                   // back to the CSS default
+    var base = parseFloat(getComputedStyle(root).fontSize);
+    var size = base;
+    var floor = base * 0.6;
+
+    while (overflows() && size > floor) {
+      size -= base * 0.02;
+      root.style.fontSize = size + "px";
+    }
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     addChrome();
     var blocks = document.querySelectorAll("pre code.ruby");
     for (var i = 0; i < blocks.length; i++) highlight(blocks[i]);
+    fitToScreen();
   });
+
+  // Re-fit once screenshots have loaded, and whenever the window or projector changes.
+  window.addEventListener("load", fitToScreen);
+  window.addEventListener("resize", fitToScreen);
+  document.addEventListener("fullscreenchange", fitToScreen);
 })();

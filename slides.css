@@ -6,7 +6,7 @@
 /* Everything is sized in rem off this one value, so the deck scales with the
    projector instead of being tuned to one screen. ~26px at 1080p, ~21px at 720p. */
 html {
-  font-size: calc(0.72vw + 12px);
+  font-size: calc(1vw + 13px);
 }
 
 html, body {
@@ -24,7 +24,7 @@ body {
   flex-direction: column;
   justify-content: center;
   justify-content: safe center; /* on a short screen, overflow downward instead of clipping the top */
-  padding: 4vh 5vw 6vh 5vw;
+  padding: 4vh 4vw 6vh 4vw;
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -90,10 +90,11 @@ em { color: #4dd0e1; font-style: normal; }
 }
 
 .lead {
-  font-size: 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
   color: #fff;
-  margin-bottom: 1.8rem;
-  max-width: 30em;
+  margin-bottom: 1.6rem;
+  max-width: 40em;
 }
 
 a { color: #4dd0e1; }
@@ -117,7 +118,7 @@ pre {
   padding: 1.3rem 1.6rem;
   margin: 1rem 0 1.4rem 0;
   overflow-x: auto;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   line-height: 1.6;
 }
 
@@ -154,8 +155,11 @@ p code, li code {
 
 .shot {
   display: block;
+  align-self: flex-start;  /* body is a column flexbox: without this the image is
+                              stretched to the full content width, ignoring its ratio */
   max-width: 100%;
   max-height: 64vh;
+  object-fit: contain;
   margin: 1rem 0 0 0;
   border: 1px solid #262626;
   border-radius: 4px;
@@ -206,10 +210,10 @@ p code, li code {
 
 .qr {
   display: block;
-  width: 260px;
-  height: 260px;
+  width: 15rem;          /* scales with the rest of the deck */
+  height: auto;          /* the PNG is not exactly square - do not stretch it */
   margin: 2.5rem 0 1.5rem 0;
   background: #fff;
-  padding: 0;
+  padding: 0.6rem;       /* white quiet zone, so the code is not flush against black */
   border-radius: 6px;
 }
