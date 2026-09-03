@@ -3,24 +3,22 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Layered coverage</title>
+  <title>Layered Test Coverage</title>
   <link rel="stylesheet" href="deck.css">
   <script src="deck.js"></script>
 </head>
 <body>
 <div class="slide">
 
-    <h2>Layered coverage</h2>
+    <h2>Layered Test Coverage</h2>
 
     <ul>
-      <li><strong>Controller spec</strong> &mdash; it's assigned, and it's an SVG. Every URL variation.</li>
-      <li><strong>End-to-end</strong> &mdash; a real code, real page, after a real click. Once.</li>
-      <li><strong>Nobody</strong> decodes it.</li>
+      <li>Controller spec</li>
     </ul>
 
     <p class="filename">share_controller_spec.rb</p>
   <pre><code class="ruby">expect(assigns(:qr_svg)).to include("&lt;svg")
-  </code></pre>
+</code></pre>
 
 </div>
 </body>

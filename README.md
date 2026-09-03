@@ -6,8 +6,8 @@ straight off disk.
 - One HTML file per slide, numbered in running order.
 - `deck.css` and `deck.js` are shared by all of them.
 - Navigate: `→` / `space` / `PageDown` forward, `←` / `PageUp` back, `Home` / `End` to
-  jump to the ends, `f` for fullscreen. Clicking the right of the screen advances, the
-  left third goes back.
+  jump to the ends, `f` for fullscreen. Clicking the slide does nothing — use the keys,
+  or the arrows beside the slide counter.
 
 ## Sizing
 

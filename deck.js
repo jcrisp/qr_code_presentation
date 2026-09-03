@@ -13,10 +13,10 @@
     "05-choosing-a-gem.html",
     "06-cutting-the-dependency.html",
     "07-generating.html",
-    "08-testing-what-we-skipped.html",
-    "09-testing-what-we-did.html",
-    "10-proving-it-changed.html",
-    "11-layered-coverage.html",
+    "08-layered-coverage.html",
+    "09-testing-what-we-skipped.html",
+    "10-testing-what-we-did.html",
+    "11-proving-it-changed.html",
     "12-takeaways.html",
     "13-questions.html"
   ];
@@ -48,12 +48,6 @@
       if (document.fullscreenElement) document.exitFullscreen();
       else document.documentElement.requestFullscreen();
     }
-  });
-
-  // Click the right two thirds to advance, the left third to go back.
-  document.addEventListener("click", function (event) {
-    if (event.target.closest("a")) return;
-    go(event.clientX < window.innerWidth / 3 ? -1 : 1);
   });
 
   function addChrome(slide) {

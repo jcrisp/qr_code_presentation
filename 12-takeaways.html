@@ -3,21 +3,21 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Takeaways</title>
+  <title>Recommendations</title>
   <link rel="stylesheet" href="deck.css">
   <script src="deck.js"></script>
 </head>
 <body>
 <div class="slide">
 
-    <h2>Takeaways</h2>
+    <h2>Recommendations</h2>
 
     <ul>
-      <li>Smallest gem that does the job, not the most capable.</li>
-      <li>Output format is architecture: <strong>SVG</strong> deleted a dependency, scaled free, made it testable.</li>
-      <li>Unused code still ships. A parser you never call is surface with no upside.</li>
-      <li>A fork is fair when the patch is small &mdash; and bad when it isn't.</li>
-      <li>Test the failure that <strong>actually happens</strong>.</li>
+      <li>Choose the smallest gem which looks popular and maintained, with least dependencies.</li>
+      <li>Use <strong>SVG</strong> &mdash; it scales, is easily testable and requires no additional gem.</li>
+      <li>Unused gems are still potential security risks (also in Rails, e.g. ActiveStorage).</li>
+      <li>Keep the fork small and easy to merge.</li>
+      <li>Test, but balance coverage / performance / likelihood.</li>
     </ul>
 
 </div>

@@ -90,6 +90,12 @@ em { color: #4dd0e1; font-style: normal; }
   margin-bottom: 26px;
 }
 
+/* li:last-child drops its margin, so a lead following a list would otherwise
+   sit right up against the final bullet */
+* + .lead { margin-top: 32px; }
+ul + .filename { margin-top: 30px; }
+pre + ul { margin-top: 6px; }
+
 .subtitle {
   font-size: 31px;
   color: #9a9a9a;
