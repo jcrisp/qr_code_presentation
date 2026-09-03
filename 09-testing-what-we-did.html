@@ -8,11 +8,12 @@
   <script src="slides.js"></script>
 </head>
 <body>
+<div class="slide">
 
-  <h2>Testing: what we did</h2>
+    <h2>Testing: what we did</h2>
 
-  <p class="filename">shared_examples.rb</p>
-<pre><code class="ruby"># Don't decode the QR (that needs a screenshot + decoder) - just guard
+    <p class="filename">shared_examples.rb</p>
+  <pre><code class="ruby"># Don't decode the QR (that needs a screenshot + decoder) - just guard
 # against the likely failure, a blank code. A real QR has a square
 # module grid (viewBox) and a long single path; a blank one has neither.
 def assert_qr_rendered(svg)
@@ -23,9 +24,10 @@ def assert_qr_rendered(svg)
 end
 </code></pre>
 
-  <ul>
-    <li>Three structural assertions, no decoder. Takes a selector &mdash; one helper covers every page.</li>
-  </ul>
+    <ul>
+      <li>Three structural assertions, no decoder. Takes a selector &mdash; one helper covers every page.</li>
+    </ul>
 
+</div>
 </body>
 </html>

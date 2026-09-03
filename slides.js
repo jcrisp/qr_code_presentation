@@ -56,19 +56,19 @@
     go(event.clientX < window.innerWidth / 3 ? -1 : 1);
   });
 
-  function addChrome() {
+  function addChrome(slide) {
     var progress = document.createElement("div");
-    progress.id = "progress";
+    progress.className = "progress";
     progress.style.width = ((index + 1) / DECK.length * 100) + "%";
-    document.body.appendChild(progress);
+    slide.appendChild(progress);
 
     var counter = document.createElement("div");
-    counter.id = "counter";
+    counter.className = "counter";
     counter.innerHTML =
       '<a href="' + DECK[Math.max(index - 1, 0)] + '">&#8592;</a>' +
       (index + 1) + " / " + DECK.length +
       '<a href="' + DECK[Math.min(index + 1, DECK.length - 1)] + '">&#8594;</a>';
-    document.body.appendChild(counter);
+    slide.appendChild(counter);
   }
 
   var KEYWORDS = /^(def|end|do|if|elsif|else|unless|then|return|require|class|module|self|nil|true|false|and|or|not|new|it|expect|to|be|eq|find|select|yield|begin|rescue|ensure)$/;
@@ -120,44 +120,48 @@
   }
 
 
-  /* Fit-to-screen.
+  /* Scale each slide to fill the screen.
 
-     The CSS picks a root font size from the viewport; this trims it down when a
-     slide would otherwise overflow the screen or push a code block sideways. It
-     only ever shrinks - growing sparse slides would make the type size differ
-     from slide to slide, which is exactly what we do not want in a deck. */
+     The slide box shrink-wraps its own content, so offsetWidth/offsetHeight are
+     the real content size (layout metrics, unaffected by any transform already
+     applied). Scaling to whichever axis runs out first means a slide with four
+     bullets fills the screen just as a slide with a code block does. */
 
-  function overflows() {
-    if (document.body.scrollHeight > window.innerHeight + 1) return true;
-    var pres = document.getElementsByTagName("pre");
-    for (var i = 0; i < pres.length; i++) {
-      if (pres[i].scrollWidth > pres[i].clientWidth + 1) return true;
-    }
-    return false;
+  function fit() {
+    var slide = document.querySelector(".slide");
+    if (!slide) return;
+    var scale = Math.min(
+      window.innerWidth / slide.offsetWidth,
+      window.innerHeight / slide.offsetHeight
+    );
+    slide.style.transform = "scale(" + scale + ")";
+    slide.classList.add("fitted");
   }
 
-  function fitToScreen() {
-    var root = document.documentElement;
-    root.style.fontSize = "";                                   // back to the CSS default
-    var base = parseFloat(getComputedStyle(root).fontSize);
-    var size = base;
-    var floor = base * 0.6;
-
-    while (overflows() && size > floor) {
-      size -= base * 0.02;
-      root.style.fontSize = size + "px";
-    }
+  // Images have no intrinsic size until they load, which would make the first
+  // measurement wrong. On a slide with one, hold the reveal until it is ready.
+  function imagesReady() {
+    var images = document.images;
+    for (var i = 0; i < images.length; i++) if (!images[i].complete) return false;
+    return true;
   }
 
   document.addEventListener("DOMContentLoaded", function () {
-    addChrome();
-    var blocks = document.querySelectorAll("pre code.ruby");
-    for (var i = 0; i < blocks.length; i++) highlight(blocks[i]);
-    fitToScreen();
+    try {
+      addChrome(document.querySelector(".slide"));
+      var blocks = document.querySelectorAll("pre code.ruby");
+      for (var i = 0; i < blocks.length; i++) highlight(blocks[i]);
+      if (imagesReady()) fit();
+    } finally {
+      // never leave a slide invisible, whatever went wrong above
+      setTimeout(function () {
+        var slide = document.querySelector(".slide");
+        if (slide) slide.classList.add("fitted");
+      }, 700);
+    }
   });
 
-  // Re-fit once screenshots have loaded, and whenever the window or projector changes.
-  window.addEventListener("load", fitToScreen);
-  window.addEventListener("resize", fitToScreen);
-  document.addEventListener("fullscreenchange", fitToScreen);
+  window.addEventListener("load", fit);   // measures correctly once images are in
+  window.addEventListener("resize", fit);
+  document.addEventListener("fullscreenchange", fit);
 })();

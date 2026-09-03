@@ -8,13 +8,14 @@
   <script src="slides.js"></script>
 </head>
 <body>
+<div class="slide">
 
-  <h2>Proving it changed</h2>
+    <h2>Proving it changed</h2>
 
-  <p class="lead">A new location must produce a <em>different</em> code.</p>
+    <p class="lead">A new location must produce a <em>different</em> code.</p>
 
-  <p class="filename">share_spec.rb</p>
-<pre><code class="ruby">school_qr = find(".qr_svg svg path")[:d] # the entire-school QR
+    <p class="filename">share_spec.rb</p>
+  <pre><code class="ruby">school_qr = find(".qr_svg svg path")[:d] # the entire-school QR
 
 select "Building 4 - Chemical store", from: "location"
 
@@ -22,10 +23,11 @@ assert_qr_rendered(".qr_svg svg")               # still a valid QR...
 expect(find(".qr_svg svg path")[:d]).not_to eq school_qr # ...different URL
 </code></pre>
 
-  <ul>
-    <li>The path data <em>is</em> the module grid.</li>
-    <li><code>use_path: true</code> paying rent twice.</li>
-  </ul>
+    <ul>
+      <li>The path data <em>is</em> the module grid.</li>
+      <li><code>use_path: true</code> paying rent twice.</li>
+    </ul>
 
+</div>
 </body>
 </html>

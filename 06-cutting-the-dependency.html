@@ -8,18 +8,20 @@
   <script src="slides.js"></script>
 </head>
 <body>
+<div class="slide">
 
-  <h2>Cutting the dependency</h2>
+    <h2>Cutting the dependency</h2>
 
-  <ul>
-    <li>We render SVG &mdash; the PNG renderer never runs.</li>
-    <li>Image parsers: untrusted binary, memory safety, long CVE history.</li>
-    <li>Shipped code is reachable code.</li>
-    <li><strong>Codex</strong> stripped the PNG path and the gemspec line.</li>
-    <li>Fork upkeep <em>vs</em> security surface &mdash; small patch, worth it.</li>
-  </ul>
+    <ul>
+      <li>We render SVG &mdash; the PNG renderer never runs.</li>
+      <li>Image parsers: untrusted binary, memory safety, long CVE history.</li>
+      <li>Shipped code is reachable code.</li>
+      <li><strong>Codex</strong> stripped the PNG path and the gemspec line.</li>
+      <li>Fork upkeep <em>vs</em> security surface &mdash; small patch, worth it.</li>
+    </ul>
 
-  <a class="link" href="https://github.com/jcrispw/rqrcode/commit/4fedca0551ba5c4515f9dbd63dff566a3ad86d4e">github.com/jcrispw/rqrcode/commit/4fedca0551ba5c4515f9dbd63dff566a3ad86d4e</a>
+    <a class="link" href="https://github.com/jcrispw/rqrcode/commit/4fedca0551ba5c4515f9dbd63dff566a3ad86d4e">github.com/jcrispw/rqrcode/commit/4fedca0551ba5c4515f9dbd63dff566a3ad86d4e</a>
 
+</div>
 </body>
 </html>

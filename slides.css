@@ -1,62 +1,73 @@
-/* Shared styling for every slide. Deliberately dependency-free: no webfonts,
-   no CDN, no framework - the deck has to open straight off disk. */
+/* Each slide is authored in plain px, then scaled by slides.js to fill the
+   screen. The slide box shrink-wraps its own content (width: max-content up to
+   a 1280px wrap limit, height: auto), so a sparse slide scales up further than
+   a dense one and every slide fills the projector. */
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* Everything is sized in rem off this one value, so the deck scales with the
-   projector instead of being tuned to one screen. ~26px at 1080p, ~21px at 720p. */
-html {
-  font-size: calc(1vw + 13px);
-}
-
 html, body {
   height: 100%;
+  overflow: hidden;
   background: #000;
-  color: #e8e8e8;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  font-size: 1rem;
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
 }
 
 body {
   display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  justify-content: safe center; /* on a short screen, overflow downward instead of clipping the top */
-  padding: 4vh 4vw 6vh 4vw;
-  overflow-x: hidden;
-  overflow-y: auto;
 }
 
+.slide {
+  /* Laid out (so slides.js can measure it) but not painted until it has been
+     scaled - otherwise every slide change flashes the unscaled version first. */
+  visibility: hidden;
+
+  position: relative;
+  width: max-content;      /* shrink-wrap to the real content ... */
+  max-width: 1280px;       /* ... but wrap rather than run off the edge */
+  height: auto;
+  flex: none;
+  transform-origin: center center;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 44px 56px 48px 56px;
+
+  background: #000;
+  color: #e8e8e8;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 23px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Headings */
+
 h1 {
-  font-size: 4rem;
+  font-size: 84px;
   font-weight: 600;
   letter-spacing: -0.02em;
   line-height: 1.1;
 }
 
 h2 {
-  font-size: 2.4rem;
+  font-size: 50px;
   font-weight: 600;
   letter-spacing: -0.01em;
-  margin-bottom: 1.6rem;
+  line-height: 1.15;
+  margin-bottom: 32px;
   color: #fff;
 }
 
-h3 {
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: #4dd0e1;
-  margin-bottom: 0.5rem;
-}
+/* Body text */
 
-p { margin-bottom: 1rem; max-width: 46em; }
+p { margin-bottom: 16px; }
 
-ul { list-style: none; max-width: 46em; }
+ul { list-style: none; }
 
 li {
-  margin-bottom: 0.9rem;
+  margin-bottom: 18px;
   padding-left: 1.4em;
   position: relative;
 }
@@ -68,58 +79,54 @@ li::before {
   left: 0;
 }
 
-li ul { margin-top: 0.6rem; }
-li li { font-size: 0.92em; color: #b0b0b0; margin-bottom: 0.4rem; }
-li li::before { content: "–"; color: #666; }
+li:last-child { margin-bottom: 0; }
 
 strong { color: #fff; font-weight: 600; }
 em { color: #4dd0e1; font-style: normal; }
 
+.lead {
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 26px;
+}
+
 .subtitle {
-  font-size: 1.5rem;
+  font-size: 31px;
   color: #9a9a9a;
-  margin-top: 1.5rem;
+  margin-top: 24px;
 }
 
 .byline {
-  font-size: 1.6rem;
+  font-size: 34px;
   font-weight: 600;
   color: #4dd0e1;
-  margin-top: 3.5rem;
+  margin-top: 64px;
   letter-spacing: 0.01em;
-}
-
-.lead {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #fff;
-  margin-bottom: 1.6rem;
-  max-width: 40em;
 }
 
 a { color: #4dd0e1; }
 
 .link {
   display: inline-block;
+  align-self: flex-start;
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: 0.85rem;
+  font-size: 18px;
   color: #4dd0e1;
-  word-break: break-all;
-  margin-top: 1.2rem;
+  margin-top: 24px;
 }
 
-/* Code blocks */
+/* Code */
 
 pre {
   background: #0d0d0d;
   border: 1px solid #262626;
   border-left: 3px solid #4dd0e1;
   border-radius: 4px;
-  padding: 1.3rem 1.6rem;
-  margin: 1rem 0 1.4rem 0;
+  padding: 24px 30px;
+  margin: 14px 0 24px 0;
+  font-size: 21px;
+  line-height: 1.55;
   overflow-x: auto;
-  font-size: 0.9rem;
-  line-height: 1.6;
 }
 
 code {
@@ -136,10 +143,9 @@ p code, li code {
 
 .filename {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: 0.8rem;
+  font-size: 17px;
   color: #666;
-  margin-bottom: -0.6rem;
-  margin-top: 1rem;
+  margin: 14px 0 -10px 0;
 }
 
 /* Syntax highlighting - applied by slides.js */
@@ -151,69 +157,59 @@ p code, li code {
 .tok-constant { color: #ffd54f; }
 .tok-number   { color: #f8a5a5; }
 
-/* Screenshot slides */
+/* Screenshots */
 
 .shot {
   display: block;
-  align-self: flex-start;  /* body is a column flexbox: without this the image is
-                              stretched to the full content width, ignoring its ratio */
+  align-self: flex-start;  /* the slide is a column flexbox: without this the
+                              image is stretched to the full content width */
   max-width: 100%;
-  max-height: 64vh;
+  max-height: 900px;
   object-fit: contain;
-  margin: 1rem 0 0 0;
+  margin-top: 16px;
   border: 1px solid #262626;
   border-radius: 4px;
   background: #111;
 }
 
 .caption {
-  font-size: 0.95rem;
+  font-size: 20px;
   color: #8a8a8a;
-  margin-top: 1rem;
+  margin-top: 16px;
 }
 
-/* Two-column comparison */
+/* QR code on the last slide */
 
-.cols {
-  display: flex;
-  gap: 3rem;
-  margin-top: 1rem;
+.qr {
+  display: block;
+  align-self: flex-start;
+  width: 380px;
+  height: auto;            /* the PNG is not exactly square - do not stretch it */
+  margin: 34px 0 10px 0;
+  background: #fff;
+  padding: 12px;           /* white quiet zone, so it is not flush against black */
+  border-radius: 6px;
 }
 
-.cols > div { flex: 1; min-width: 0; }
+/* Chrome - inside the canvas, so it scales with everything else */
 
-/* Chrome: progress bar, counter, nav arrows */
-
-#progress {
-  position: fixed;
+.progress {
+  position: absolute;
   top: 0; left: 0;
-  height: 2px;
+  height: 3px;
   background: #4dd0e1;
-  transition: width 0.2s;
 }
 
-#counter {
-  position: fixed;
-  bottom: 1.4rem;
-  right: 2rem;
-  font-size: 0.8rem;
+.counter {
+  position: absolute;
+  bottom: 18px;
+  right: 30px;
+  font-size: 17px;
   color: #4a4a4a;
   font-variant-numeric: tabular-nums;
 }
 
-#counter a { color: #4a4a4a; text-decoration: none; padding: 0 0.4rem; }
-#counter a:hover { color: #4dd0e1; }
+.slide.fitted { visibility: visible; }
 
-.title-slide { text-align: left; }
-
-/* Questions slide */
-
-.qr {
-  display: block;
-  width: 15rem;          /* scales with the rest of the deck */
-  height: auto;          /* the PNG is not exactly square - do not stretch it */
-  margin: 2.5rem 0 1.5rem 0;
-  background: #fff;
-  padding: 0.6rem;       /* white quiet zone, so the code is not flush against black */
-  border-radius: 6px;
-}
+.counter a { color: #4a4a4a; text-decoration: none; padding: 0 8px; }
+.counter a:hover { color: #4dd0e1; }

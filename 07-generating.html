@@ -8,11 +8,12 @@
   <script src="slides.js"></script>
 </head>
 <body>
+<div class="slide">
 
-  <h2>QR Code Rendering</h2>
+    <h2>QR Code Rendering</h2>
 
-  <p class="filename">share_controller.rb</p>
-<pre><code class="ruby">def show
+    <p class="filename">share_controller.rb</p>
+  <pre><code class="ruby">def show
   require 'rqrcode'
 
   @share_url = "https://..."
@@ -20,14 +21,14 @@
 end
 </code></pre>
 
-  <p class="filename">share.html.haml</p>
-<pre><code class="ruby">.qr_svg= raw @qr_svg
-</code></pre>
+    <p class="filename">share.html.haml</p>
+  <pre><code class="ruby">.qr_svg= raw @qr_svg
+  </code></pre>
 
-  <ul>
-    <li><code>viewbox: true</code> &mdash; no fixed size, CSS decides.</li>
-    <li><code>use_path: true</code> &mdash; one path, not 900 rects.</li>
-  </ul>
+    <ul>
+      <li><code>viewbox: true</code> &mdash; no fixed size, CSS decides. <code>use_path: true</code> &mdash; one path, not 900 rects.</li>
+    </ul>
 
+</div>
 </body>
 </html>

@@ -11,10 +11,15 @@ straight off disk.
 
 ## Sizing
 
-Type is sized in rem off one root value that scales with the viewport (~26px at 1080p),
-so the deck adapts to whatever it is projected on. `slides.js` then shrinks that root
-value if a slide would overflow the screen or push a code block sideways. It only ever
-shrinks — growing sparse slides would make the type size wander between slides.
+Slides are authored in plain px. The `.slide` box shrink-wraps its own content
+(`width: max-content` up to a 1280px wrap limit, `height: auto`), and `slides.js`
+scales it with a CSS transform to whichever axis runs out first. So each slide fills
+the screen on its own terms: a four-bullet slide scales up further than a slide with
+a code block, instead of both being locked to one canvas.
+
+The consequence is that type size varies between slides — a sparse slide genuinely
+shows bigger text than a dense one. To make a slide's text larger, give it less
+content; to make it smaller, add more.
 
 ## Replacing the screenshots
 
