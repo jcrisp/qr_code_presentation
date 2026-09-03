@@ -12,7 +12,7 @@
   <h2>Testing: what we did</h2>
 
   <p class="filename">shared_examples.rb</p>
-<pre class="small"><code class="ruby"># Don't decode the QR (that needs a screenshot + decoder) - just guard against
+<pre><code class="ruby"># Don't decode the QR (that needs a screenshot + decoder) - just guard against
 # the likely failure, the library emitting a blank/empty code. A real QR has a
 # square module grid (viewBox) and a long single path; an empty one would be
 # tiny or have no path data.
@@ -24,8 +24,10 @@ def assert_qr_rendered(svg)
 end
 </code></pre>
 
-  <p>Three cheap structural assertions, no decoder. It takes a selector, so the same helper
-  covers every page that shows a code.</p>
+  <ul>
+    <li>Three structural assertions, no decoder.</li>
+    <li>Takes a selector &mdash; one helper covers every page.</li>
+  </ul>
 
 </body>
 </html>

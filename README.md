@@ -14,6 +14,13 @@ straight off disk.
 `images/screen.png` and `images/print.png` are generated placeholders. Overwrite them
 with the real screenshots, keeping the same filenames — nothing else needs changing.
 
+## The QR code on the last slide
+
+`images/link-qr.svg` is a placeholder. Generate a real QR code for the commit link and
+overwrite that file, keeping the same name — the slide sizes it via the `.qr` class, so
+nothing else needs changing. SVG is preferred, but a PNG works if you rename the reference
+in `13-questions.html`.
+
 ## Adding or reordering slides
 
 Add the file, then add its filename to the `DECK` array at the top of `slides.js`. That

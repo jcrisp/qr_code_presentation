@@ -11,11 +11,10 @@
 
   <h2>Proving it changed</h2>
 
-  <p class="lead">Picking a location has to regenerate a <em>different</em> code. You can
-  check that without decoding either one.</p>
+  <p class="lead">A new location must produce a <em>different</em> code.</p>
 
   <p class="filename">share_spec.rb</p>
-<pre class="small"><code class="ruby">school_qr = find(".qr_svg svg path")[:d] # the entire-school QR
+<pre><code class="ruby">school_qr = find(".qr_svg svg path")[:d] # the entire-school QR
 
 select "Building 4 - Chemical store", from: "location"
 
@@ -23,8 +22,10 @@ assert_qr_rendered(".qr_svg svg")                        # still a valid QR...
 expect(find(".qr_svg svg path")[:d]).not_to eq school_qr # ...encoding a different URL
 </code></pre>
 
-  <p class="note">The path data <em>is</em> the module grid. If the URL changed, the path
-  changed. That's <code>use_path: true</code> paying rent a second time.</p>
+  <ul>
+    <li>The path data <em>is</em> the module grid.</li>
+    <li><code>use_path: true</code> paying rent twice.</li>
+  </ul>
 
 </body>
 </html>
