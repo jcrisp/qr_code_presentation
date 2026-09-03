@@ -57,10 +57,12 @@
   });
 
   function addChrome(slide) {
+    // on the body, not the slide: it must not scale with the slide, and must not
+    // be hidden while the slide waits to be fitted
     var progress = document.createElement("div");
     progress.className = "progress";
     progress.style.width = ((index + 1) / DECK.length * 100) + "%";
-    slide.appendChild(progress);
+    document.body.appendChild(progress);
 
     var counter = document.createElement("div");
     counter.className = "counter";

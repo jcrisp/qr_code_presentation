@@ -4,7 +4,7 @@ Open `01-title.html` in any browser. No build step, no server, no network — it
 straight off disk.
 
 - One HTML file per slide, numbered in running order.
-- `slides.css` and `slides.js` are shared by all of them.
+- `deck.css` and `deck.js` are shared by all of them.
 - Navigate: `→` / `space` / `PageDown` forward, `←` / `PageUp` back, `Home` / `End` to
   jump to the ends, `f` for fullscreen. Clicking the right of the screen advances, the
   left third goes back.
@@ -12,7 +12,7 @@ straight off disk.
 ## Sizing
 
 Slides are authored in plain px. The `.slide` box shrink-wraps its own content
-(`width: max-content` up to a 1280px wrap limit, `height: auto`), and `slides.js`
+(`width: max-content` up to a 1280px wrap limit, `height: auto`), and `deck.js`
 scales it with a CSS transform to whichever axis runs out first. So each slide fills
 the screen on its own terms: a four-bullet slide scales up further than a slide with
 a code block, instead of both being locked to one canvas.
@@ -34,5 +34,5 @@ margin around it so it is not flush against the black background.
 
 ## Adding or reordering slides
 
-Add the file, then add its filename to the `DECK` array at the top of `slides.js`. That
+Add the file, then add its filename to the `DECK` array at the top of `deck.js`. That
 array is the single source of running order and drives the counter and progress bar.

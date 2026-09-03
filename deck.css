@@ -1,4 +1,4 @@
-/* Each slide is authored in plain px, then scaled by slides.js to fill the
+/* Each slide is authored in plain px, then scaled by deck.js to fill the
    screen. The slide box shrink-wraps its own content (width: max-content up to
    a 1280px wrap limit, height: auto), so a sparse slide scales up further than
    a dense one and every slide fills the projector. */
@@ -18,7 +18,7 @@ body {
 }
 
 .slide {
-  /* Laid out (so slides.js can measure it) but not painted until it has been
+  /* Laid out (so deck.js can measure it) but not painted until it has been
      scaled - otherwise every slide change flashes the unscaled version first. */
   visibility: hidden;
 
@@ -148,7 +148,7 @@ p code, li code {
   margin: 14px 0 -10px 0;
 }
 
-/* Syntax highlighting - applied by slides.js */
+/* Syntax highlighting - applied by deck.js */
 
 .tok-comment  { color: #5f6f6f; font-style: italic; }
 .tok-string   { color: #a5d6a7; }
@@ -191,14 +191,18 @@ p code, li code {
   border-radius: 6px;
 }
 
-/* Chrome - inside the canvas, so it scales with everything else */
+/* The progress bar is fixed to the viewport, not the slide, so it keeps the
+   same thickness and full width whatever scale the current slide is at. */
 
 .progress {
-  position: absolute;
+  position: fixed;
   top: 0; left: 0;
-  height: 3px;
+  height: 4px;
   background: #4dd0e1;
+  z-index: 10;
 }
+
+/* The counter sits inside the slide, so it scales with it */
 
 .counter {
   position: absolute;
